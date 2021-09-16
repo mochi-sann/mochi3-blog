@@ -229,3 +229,13 @@ This paragraph has some `code` in it.
 ![Alt Text](https://placehold.it/200x50 "Image Title")
 
     ![Alt Text](https://placehold.it/200x50 "Image Title")
+
+```ts
+import dayjs from "dayjs"
+
+const DateFormater = (value: string) => {
+  return dayjs(value).format("YYYY-MM-DD")
+}
+
+export default DateFormater
+```

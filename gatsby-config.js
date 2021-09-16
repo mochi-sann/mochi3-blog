@@ -59,12 +59,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: "gatsby-plugin-graphql-codegen",
-      options: {
-        fileName: `src/types/graphql-types.d.ts`,
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-graphql-codegen",
+    //   options: {
+    //     fileName: `src/types/graphql-types.d.ts`,
+    //   },
+    // },
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
     //   options: {

@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { GetSitelistQuery } from "../types/graphql-types"
 import { Box, Heading, Text, VStack, StackDivider } from "@chakra-ui/react"
+import DateFormater from "../lib/dateFormater"
 
 type Props = GetSitelistQuery
 
@@ -29,7 +30,7 @@ const BlogIndex: React.VFC<PageProps<Props>> = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      {/* <Seo title="All posts" /> */}
+      <Seo title="All posts" />
       {/* <Bio /> */}
       <VStack
         divider={<StackDivider borderColor="gray.300" />}
@@ -54,8 +55,7 @@ const BlogIndex: React.VFC<PageProps<Props>> = ({ data, location }) => {
                       </Text>
                     </Link>
                   </Heading>
-
-                  <small>{post.frontmatter!.date}</small>
+                  <Text as="small">{DateFormater(post.frontmatter!.date)}</Text>
                 </header>
                 <section>
                   <p

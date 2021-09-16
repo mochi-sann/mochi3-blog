@@ -1,39 +1,45 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, PageProps } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { BlogPostBySlugQuery } from "../types/graphql-types"
+import { Box, Heading, Text } from "@chakra-ui/layout"
+import DateFormater from "../lib/dateFormater"
 
-const BlogPostTemplate = ({ data, location }) => {
+const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
+  data,
+  location,
+}) => {
   const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata?.title || `Title`
+  const siteTitle = data.site!.siteMetadata?.title || `Title`
   const { previous, next } = data
 
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={post!.frontmatter!.title || ""}
+        description={post!.frontmatter!.description || post!.excerpt || ""}
       />
-      <article
+      <Box
+        as="article"
         className="blog-post"
         itemScope
         itemType="http://schema.org/Article"
       >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-        </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
+        <Box>
+          <Heading itemProp="headline">{post!.frontmatter!.title}</Heading>
+          <Text>{DateFormater(post!.frontmatter!.date)}</Text>
+        </Box>
+
+        <Box
+          as="section"
+          dangerouslySetInnerHTML={{ __html: post!.html || "" }}
           itemProp="articleBody"
         />
         <hr />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+      </Box>
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -46,15 +52,15 @@ const BlogPostTemplate = ({ data, location }) => {
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+              <Link to={previous!.fields!.slug || ""} rel="prev">
+                ← {previous.frontmatter!.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+              <Link to={next.fields!.slug || ""} rel="next">
+                {next.frontmatter!.title} →
               </Link>
             )}
           </li>
