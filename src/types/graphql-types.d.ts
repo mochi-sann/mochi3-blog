@@ -3503,10 +3503,23 @@ export type SiteBuildMetadataSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+export type BioQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_1_Query = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+export type BioQueryQuery = { site?: Maybe<{ siteMetadata?: Maybe<{ author?: Maybe<Pick<Author, 'name' | 'summary'>>, social?: Maybe<Pick<Social, 'twitter'>> }> }> };
+
+export type SiteSeOdataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SiteSeOdataQuery = { site?: Maybe<{ siteMetadata?: Maybe<(
+      Pick<SiteSiteMetadata, 'title' | 'description'>
+      & { social?: Maybe<Pick<Social, 'twitter'>> }
+    )> }> };
+
+export type GetSiteTitleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSiteTitleQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 export type GetSitelistQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3516,7 +3529,7 @@ export type GetSitelistQuery = { site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSi
       & { fields?: Maybe<Pick<Fields, 'slug'>>, frontmatter?: Maybe<Pick<Frontmatter, 'date' | 'title' | 'description'>> }
     )> } };
 
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_2_Query = { site?: Maybe<Pick<Site, 'buildTime'>> };
+export type Unnamed_1_Query = { site?: Maybe<Pick<Site, 'buildTime'>> };

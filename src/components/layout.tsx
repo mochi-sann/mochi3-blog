@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { Box } from "@chakra-ui/layout"
+import { Box, Container, Heading } from "@chakra-ui/layout"
 
 type Props = {
   children: React.ReactNode
@@ -15,10 +15,10 @@ const Layout: React.VFC<Props> = ({ location, title, children }) => {
   const isRootPath = location.pathname === rootPath
 
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <Box as="header">
+    <Container data-is-root-path={isRootPath}>
+      <Box as="header" p="2">
         <Link className="header-link-home" to="/">
-          {title}
+          <Heading>{title}</Heading>
         </Link>
       </Box>
 
@@ -28,7 +28,7 @@ const Layout: React.VFC<Props> = ({ location, title, children }) => {
         {` `}
         <a href="https://www.gatsbyjs.com">Gatsby</a>
       </footer>
-    </div>
+    </Container>
   )
 }
 
