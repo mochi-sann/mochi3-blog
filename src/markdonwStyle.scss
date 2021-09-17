@@ -1,4 +1,6 @@
 .markdownBody {
+  // @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital@0;1&display=swap");
+
   h1,
   h2,
   h3,
@@ -7,8 +9,12 @@
   h6 {
     font-weight: bold;
 
-    // margin-top: 1em;
-    // margin-bottom: 16px;
+    margin-top: 0.5em;
+    margin-bottom: 16px;
+  }
+  h1,
+  h2 {
+    border-bottom: 8px solid var(--chakra-colors-gray-300);
   }
   h1 {
     font-size: var(--chakra-fontSizes-5xl);
@@ -27,5 +33,19 @@
   }
   h6 {
     font-size: var(--chakra-fontSizes-lg);
+  }
+  blockquote {
+    border-left: 6px solid var(--chakra-colors-gray-300);
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+  }
+  a {
+    color: var(--chakra-colors-blue-500);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+  code,
+  pre {
+    font-family: "JetBrains Mono", monospace;
   }
 }
