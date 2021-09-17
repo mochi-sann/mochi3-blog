@@ -1,12 +1,12 @@
 import * as React from "react"
 import { Link, graphql, PageProps } from "gatsby"
-
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { BlogPostBySlugQuery } from "../types/graphql-types"
-import { Box, Heading, Text } from "@chakra-ui/layout"
+import { Box, Heading, Text, Button, Divider } from "@chakra-ui/react"
 import DateFormater from "../lib/dateFormater"
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
 
 const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
   data,
@@ -29,18 +29,21 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
         itemType="http://schema.org/Article"
       >
         <Box>
-          <Heading itemProp="headline">{post!.frontmatter!.title}</Heading>
+          <Heading itemProp="headline" bg="gray.200" mt="2" p="2">
+            {post!.frontmatter!.title}
+          </Heading>
           <Text>{DateFormater(post!.frontmatter!.date)}</Text>
         </Box>
 
         <Box
+          className="markdownBody"
           as="section"
           dangerouslySetInnerHTML={{ __html: post!.html || "" }}
           itemProp="articleBody"
         />
-        <hr />
       </Box>
-      <nav className="blog-post-nav">
+      <Divider />
+      <Box as="nav" py="2" className="blog-post-nav">
         <ul
           style={{
             display: `flex`,
@@ -53,19 +56,23 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
           <li>
             {previous && (
               <Link to={previous!.fields!.slug || ""} rel="prev">
-                ← {previous.frontmatter!.title}
+                <Button leftIcon={<ArrowBackIcon />}>
+                  {previous.frontmatter!.title}
+                </Button>
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={next.fields!.slug || ""} rel="next">
-                {next.frontmatter!.title} →
+                <Button rightIcon={<ArrowForwardIcon />}>
+                  {next.frontmatter!.title}
+                </Button>
               </Link>
             )}
           </li>
         </ul>
-      </nav>
+      </Box>
     </Layout>
   )
 }
@@ -89,7 +96,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY MM dd")
         description
       }
     }

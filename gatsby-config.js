@@ -59,18 +59,20 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: "gatsby-plugin-graphql-codegen",
-    //   options: {
-    //     fileName: `src/types/graphql-types.d.ts`,
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-graphql-codegen",
+      options: {
+        codegen: false,
+        fileName: `src/types/graphql-types.d.ts`,
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-google-analytics`,
     //   options: {
     //     trackingId: `ADD YOUR TRACKING ID HERE`,
     //   },
     // },
+    "gatsby-plugin-sass",
     {
       resolve: `gatsby-plugin-feed`,
       options: {

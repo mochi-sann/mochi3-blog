@@ -1,0 +1,31 @@
+.markdownBody {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+
+    // margin-top: 1em;
+    // margin-bottom: 16px;
+  }
+  h1 {
+    font-size: var(--chakra-fontSizes-5xl);
+  }
+  h2 {
+    font-size: var(--chakra-fontSizes-4xl);
+  }
+  h3 {
+    font-size: var(--chakra-fontSizes-3xl);
+  }
+  h4 {
+    font-size: var(--chakra-fontSizes-2xl);
+  }
+  h5 {
+    font-size: var(--chakra-fontSizes-xl);
+  }
+  h6 {
+    font-size: var(--chakra-fontSizes-lg);
+  }
+}
