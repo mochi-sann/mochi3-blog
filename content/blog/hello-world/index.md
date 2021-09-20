@@ -100,6 +100,12 @@ This is a paragraph.
 > Here's some example code:
 >
 >     Markdown.generate();
+>
+> > # テスト
+> >
+> > hoge わーいこんにちは
+> >
+> > > ## 2 つ目
 
     > ## This is a header.
     > 1. This is the first list item.
@@ -144,8 +150,8 @@ This is a paragraph.
 ```
 
 1. Buy flour and salt
-1. Mix together with water
-1. Bake
+2. Mix together with water
+3. Bake
 
 ```markdown
 1. Buy flour and salt
