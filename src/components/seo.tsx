@@ -9,19 +9,28 @@ import * as React from "react"
 import { Helmet, HelmetProps } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { SiteSeOdataQuery } from "../types/graphql-types"
+import ogp_image from "../images/brian-cornelius-fqli_lsxtIo-unsplash.jpg"
 type SeoProps = {
   description?: string
   lang?: string
   meta?: HelmetProps["meta"][]
   title: string
+  image?: string
 }
 
-const Seo: React.VFC<SeoProps> = ({ description, lang, meta, title }) => {
-  const { site } = useStaticQuery(
+const Seo: React.VFC<SeoProps> = ({
+  description,
+  lang,
+  meta,
+  title,
+  image,
+}) => {
+  const { site }: { site: SiteSeOdataQuery["site"] } = useStaticQuery(
     graphql`
       query SiteSEOdata {
         site {
           siteMetadata {
+            siteUrl
             title
             description
             social {
@@ -34,8 +43,11 @@ const Seo: React.VFC<SeoProps> = ({ description, lang, meta, title }) => {
   )
 
   const metaDescription: HelmetProps["titleTemplate"] =
-    description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+    description || site!.siteMetadata!.description || ""
+  const defaultTitle = site?.siteMetadata?.title
+
+  const siteUrl = site!.siteMetadata!.siteUrl
+  const defaultImage = `${siteUrl}${ogp_image}`
 
   return (
     <Helmet
@@ -45,6 +57,10 @@ const Seo: React.VFC<SeoProps> = ({ description, lang, meta, title }) => {
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
       meta={[
+        {
+          property: "og:image",
+          content: image || defaultImage,
+        },
         {
           name: `description`,
           content: metaDescription,
@@ -67,7 +83,7 @@ const Seo: React.VFC<SeoProps> = ({ description, lang, meta, title }) => {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
+          content: site!.siteMetadata?.social?.twitter || ``,
         },
         {
           name: `twitter:title`,

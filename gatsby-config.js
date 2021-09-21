@@ -4,8 +4,8 @@ module.exports = {
     author: {
       name: `mochi`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `mochi のブログです`,
+    siteUrl: `https://blog.mochi3.dev`,
     social: {
       twitter: `mochi_749`,
     },
@@ -42,7 +42,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              maxWidth: 800,
             },
           },
           {
@@ -54,6 +54,65 @@ module.exports = {
           `gatsby-remark-prismjs`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-sns-images`,
+            options: {
+              output: {
+                directory: "",
+                fileName: "thumbnail.png",
+              },
+              image: {
+                width: 1200,
+                height: 630,
+                backgroundColor: "#dbe2ef",
+              },
+              style: {
+                title: {
+                  fontFamily: "Noto Sans CJK JP",
+                  fontColor: "#000000",
+                  fontWeight: "bold",
+                  fontSize: 64,
+                  paddingTop: 100,
+                  paddingBottom: 200,
+                  paddingLeft: 150,
+                  paddingRight: 150,
+                },
+                author: {
+                  fontFamily: "Noto Sans CJK JP",
+                  fontColor: "#020205",
+                  fontWeight: "400",
+                  fontSize: 42,
+                },
+              },
+              meta: {
+                title: "mochi blog |",
+                author: "mochi3.dev",
+              },
+              fontFile: [
+                {
+                  path: require.resolve("./src/fonts/NotoSansCJKjp-Bold.otf"),
+                  family: "Noto Sans CJK JP",
+                  weight: "bold",
+                },
+                {
+                  path: require.resolve(
+                    "./src/fonts/NotoSansCJKjp-Regular.otf"
+                  ),
+                  family: "Noto Sans CJK JP",
+                  weight: "400",
+                },
+              ],
+              iconFile: require.resolve("./src/images/siteicon.png"),
+              timeout: 10000,
+            },
+          },
         ],
       },
     },

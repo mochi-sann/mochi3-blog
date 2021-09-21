@@ -21,6 +21,14 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
       <Seo
         title={post!.frontmatter!.title || ""}
         description={post!.frontmatter!.description || post!.excerpt || ""}
+        image={
+          data!.site!.siteMetadata!.siteUrl! ||
+          data.markdownRemark!.fields!.slug!
+            ? `${data!.site!.siteMetadata!.siteUrl}${
+                data!.markdownRemark!.fields!.slug
+              }${"thumbnail.png"}`
+            : undefined
+        }
       />
       <Box
         as="article"
@@ -30,7 +38,7 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
       >
         <Box>
           <Heading itemProp="headline" bg="gray.200" mt="2" p="2">
-            {post!.frontmatter!.title}
+            {post!.frontmatter!.title} |{" "}
           </Heading>
           <Text>{DateFormater(post!.frontmatter!.date)}</Text>
         </Box>
@@ -88,6 +96,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     markdownRemark(id: { eq: $id }) {
@@ -98,6 +107,9 @@ export const pageQuery = graphql`
         title
         date(formatString: "YYYY MM DD")
         description
+      }
+      fields {
+        slug
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
