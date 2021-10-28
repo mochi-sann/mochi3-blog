@@ -46,13 +46,14 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
             <Text>{DateFormater(post!.frontmatter!.date)} </Text>
           )}
         </Box>
-        {/* <Box
+        <Box
           className="markdownBody"
           as="section"
-          dangerouslySetInnerHTML={{ __html: post!.html || "" }}
+          // dangerouslySetInnerHTML={{ __html: post!.html || "" }}
           itemProp="articleBody"
-        /> */}
-        {BologBodyParser(post!.html || "")}
+        >
+          {BologBodyParser(post!.html || "")}
+        </Box>
       </Box>
       <Divider />
       <Box as="nav" py="2" className="blog-post-nav">
