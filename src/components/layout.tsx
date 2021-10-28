@@ -1,8 +1,16 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { Box, Container, Flex, Heading, Spacer } from "@chakra-ui/layout"
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  HStack,
+  Spacer,
+} from "@chakra-ui/layout"
 import { FiTwitter, FiGithub } from "react-icons/fi"
 import { Button, IconButton } from "@chakra-ui/button"
+import { useColorMode } from "@chakra-ui/color-mode"
 type Props = {
   children: React.ReactNode
   title: string
@@ -14,16 +22,23 @@ type Props = {
 const Layout: React.VFC<Props> = ({ location, title, children }) => {
   const rootPath = `/`
   const isRootPath = location.pathname === rootPath
+  const { colorMode, toggleColorMode } = useColorMode()
 
   return (
     <Box>
       <Box boxShadow="base">
         <Container maxW="800px">
-          <Flex as="header" py="2" gridGap="2">
+          <HStack as="header" py="2">
             <Link className="header-link-home" to="/">
               <Heading fontWeight="800">{title}</Heading>
             </Link>
             <Spacer />
+            <IconButton
+              color="white"
+              onClick={toggleColorMode}
+              icon={<FiTwitter size="20px" />}
+              aria-label="Toggle dark mode"
+            />
             <IconButton
               as="a"
               href="https://twitter.com/Mochi_749"
@@ -46,7 +61,7 @@ const Layout: React.VFC<Props> = ({ location, title, children }) => {
               icon={<FiGithub size="20px" />}
               aria-label="GitHub"
             />
-          </Flex>
+          </HStack>
         </Container>
       </Box>
       <Container data-is-root-path={isRootPath} maxW="800px">

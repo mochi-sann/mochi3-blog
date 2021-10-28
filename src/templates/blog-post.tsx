@@ -1,12 +1,13 @@
 import * as React from "react"
 import { Link, graphql, PageProps } from "gatsby"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { BlogPostBySlugQuery } from "../types/graphql-types"
 import { Box, Heading, Text, Button, Divider } from "@chakra-ui/react"
 import DateFormater from "../lib/dateFormater"
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
+
+import BologBodyParser from "../lib/bologBodyParser"
 
 const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
   data,
@@ -42,16 +43,16 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
           </Heading>
 
           {post!.frontmatter!.date && (
-            <Text>DateFormater(post!.frontmatter!.date) </Text>
+            <Text>{DateFormater(post!.frontmatter!.date)} </Text>
           )}
         </Box>
-
-        <Box
+        {/* <Box
           className="markdownBody"
           as="section"
           dangerouslySetInnerHTML={{ __html: post!.html || "" }}
           itemProp="articleBody"
-        />
+        /> */}
+        {BologBodyParser(post!.html || "")}
       </Box>
       <Divider />
       <Box as="nav" py="2" className="blog-post-nav">
@@ -102,6 +103,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
+
       frontmatter {
         title
         date(formatString: "YYYY MM DD")

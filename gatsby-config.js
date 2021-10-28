@@ -19,7 +19,13 @@ module.exports = {
         name: `blog`,
       },
     },
-    "@chakra-ui/gatsby-plugin",
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
+      options: {
+        resetCSS: true,
+        isUsingColorMode: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-typescript`,
       options: {
@@ -121,7 +127,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-graphql-codegen",
       options: {
-        codegen: false,
+        codegen: false, //開発時にgraphql の更新が行われたらtrueにする
         fileName: `src/types/graphql-types.d.ts`,
       },
     },
