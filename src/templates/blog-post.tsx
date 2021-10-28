@@ -38,9 +38,12 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
       >
         <Box>
           <Heading itemProp="headline" bg="gray.200" mt="2" p="2">
-            {post!.frontmatter!.title} |{" "}
+            {post!.frontmatter!.title}
           </Heading>
-          <Text>{DateFormater(post!.frontmatter!.date)}</Text>
+
+          {post!.frontmatter!.date && (
+            <Text>DateFormater(post!.frontmatter!.date) </Text>
+          )}
         </Box>
 
         <Box
@@ -64,18 +67,14 @@ const BlogPostTemplate: React.VFC<PageProps<BlogPostBySlugQuery>> = ({
           <li>
             {previous && (
               <Link to={previous!.fields!.slug || ""} rel="prev">
-                <Button leftIcon={<ArrowBackIcon />}>
-                  {previous.frontmatter!.title}
-                </Button>
+                <Button leftIcon={<ArrowBackIcon />}>前の記事を見る</Button>
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={next.fields!.slug || ""} rel="next">
-                <Button rightIcon={<ArrowForwardIcon />}>
-                  {next.frontmatter!.title}
-                </Button>
+                <Button rightIcon={<ArrowForwardIcon />}>次の記事を見る</Button>
               </Link>
             )}
           </li>
